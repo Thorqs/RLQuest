@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://quest_entry.gd" type="Script" id=1]
+[ext_resource path="res://neuropolitical rg.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="Node" type="Panel"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 0.21
+anchor_bottom = 0.083
+margin_right = -100.04
+margin_bottom = -1.8
+rect_min_size = Vector2( 215, 50 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="quest_name" type="Label" parent="."]
+margin_left = 1.0
+margin_top = 1.0
+margin_right = 176.0
+margin_bottom = 49.0
+rect_min_size = Vector2( 78, 0 )
+size_flags_vertical = 1
+custom_fonts/font = SubResource( 1 )
+text = "Quest Step."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -38.0
+margin_right = -2.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer"]
+margin_right = 36.0
+margin_bottom = 24.0
+
+[node name="EditButton" type="Button" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 36.0
+margin_bottom = 48.0
+text = "Edit"
+
+[node name="quest_panel" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 232.238
+margin_top = -11.091
+margin_right = 660.238
+margin_bottom = 205.909
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="q_step_name" type="TextEdit" parent="quest_panel"]
+anchor_right = 1.0
+margin_bottom = 21.0
+text = "Quest Step"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="q_step_details" type="TextEdit" parent="quest_panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -196.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="VBoxContainer/CheckBox" to="." method="_on_CheckBox_pressed"]
+[connection signal="pressed" from="VBoxContainer/EditButton" to="." method="_on_EditButton_pressed"]
+[connection signal="text_changed" from="quest_panel/q_step_name" to="." method="_on_q_step_name_text_changed"]
