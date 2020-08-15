@@ -4,16 +4,18 @@
 [ext_resource path="res://neuropolitical rg.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-outline_size = 1
+size = 20
+outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 2 )
 
 [node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -0.00012207
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -22,40 +24,126 @@ __meta__ = {
 [node name="ParentVBoX" type="VBoxContainer" parent="."]
 margin_left = 10.0
 margin_top = 10.0
+margin_right = 225.0
+margin_bottom = 39.0
 rect_min_size = Vector2( 215, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TitleHBox" type="HBoxContainer" parent="ParentVBoX"]
+[node name="objectiveLabel" type="Label" parent="ParentVBoX"]
 margin_right = 215.0
-margin_bottom = 20.0
-
-[node name="objective_label" type="Label" parent="ParentVBoX/TitleHBox"]
-margin_right = 187.0
-margin_bottom = 20.0
+margin_bottom = 25.0
 custom_fonts/font = SubResource( 1 )
-text = "Current Objectives"
-
-[node name="add_button" type="Button" parent="ParentVBoX/TitleHBox"]
-margin_left = 191.0
-margin_right = 211.0
-margin_bottom = 20.0
-hint_tooltip = "Add another task item"
-text = "+"
+text = "Objectives"
 
 [node name="QuestListVBox" type="VBoxContainer" parent="ParentVBoX"]
-margin_top = 24.0
+margin_top = 29.0
 margin_right = 215.0
-margin_bottom = 24.0
+margin_bottom = 29.0
 
-[node name="quit_button" type="Button" parent="ParentVBoX"]
-margin_top = 28.0
-margin_right = 215.0
-margin_bottom = 54.0
-hint_tooltip = "Closes the program"
+[node name="MascotViewContainer" type="ViewportContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -238.0
+margin_top = -217.0
+hint_tooltip = "Click for options"
+stretch = true
+stretch_shrink = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MascotView" type="Viewport" parent="MascotViewContainer"]
+size = Vector2( 119, 108 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="MascotCamera" type="Camera" parent="MascotViewContainer/MascotView"]
+fov = 67.4622
+
+[node name="MascotLight" type="OmniLight" parent="MascotViewContainer/MascotView/MascotCamera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92363, 3.42965, 3.49877 )
+omni_range = 13.1604
+
+[node name="InteractionMenu" type="MenuButton" parent="MascotViewContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 custom_fonts/font = SubResource( 2 )
-text = "Close RL Quest"
-flat = true
-[connection signal="pressed" from="ParentVBoX/TitleHBox/add_button" to="." method="_on_add_button_pressed"]
-[connection signal="pressed" from="ParentVBoX/quit_button" to="." method="_on_quit_pressed"]
+text = "Interaction Menu"
+flat = false
+items = [ "Toggle Journal", null, 0, false, false, 0, 0, null, "", false, "Quit", null, 0, false, false, 1, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Journal" type="Panel" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -250.0
+margin_right = 250.0
+margin_bottom = 250.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="questLabel" type="Label" parent="Journal"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 95.0
+margin_bottom = 19.0
+text = "Quests"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="questScroller" type="ScrollContainer" parent="Journal"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 5.0
+margin_top = -225.0
+margin_right = 95.0
+margin_bottom = 215.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="questNames" type="VBoxContainer" parent="Journal/questScroller"]
+margin_right = 90.0
+margin_bottom = 440.0
+rect_min_size = Vector2( 80, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="addButton" type="Button" parent="Journal"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -30.0
+margin_right = 90.0
+margin_bottom = -9.99997
+hint_tooltip = "Add another task item"
+text = "+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="questHeader" type="Label" parent="Journal"]
+margin_left = 105.0
+margin_top = 5.0
+margin_right = 495.0
+margin_bottom = 19.0
+
+[node name="questDetails" type="TextEdit" parent="Journal"]
+margin_left = 105.0
+margin_top = 25.0
+margin_right = 495.0
+margin_bottom = 465.0
+[connection signal="pressed" from="Journal/addButton" to="." method="_on_add_button_pressed"]

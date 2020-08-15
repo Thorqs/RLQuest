@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://QuestGraph.gd" type="Script" id=1]
+[ext_resource path="res://questStepNode.tscn" type="PackedScene" id=2]
+
+[node name="QuestGraph" type="GraphEdit"]
+margin_left = 100.576
+margin_top = 75.8635
+margin_right = 1321.58
+margin_bottom = 849.863
+scroll_offset = Vector2( -263, -40 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="questStepNode" parent="." instance=ExtResource( 2 )]
+margin_left = 263.0
+margin_top = 40.0
+margin_right = 893.0
+margin_bottom = 486.0
+mouse_filter = 1
+[connection signal="connection_request" from="." to="." method="_on_QuestGraph_connection_request"]
+[connection signal="connection_to_empty" from="." to="." method="_on_QuestGraph_connection_to_empty"]
+[connection signal="delete_nodes_request" from="." to="." method="_on_QuestGraph_delete_nodes_request"]
+[connection signal="disconnection_request" from="." to="." method="_on_QuestGraph_disconnection_request"]
