@@ -14,8 +14,9 @@ func _ready():
 
 
 func _on_questStepNode_close_request():
+	get_parent().disconnect_connections_of_node(name)
 	queue_free()
-	
+	get_parent().save()
 
 
 
@@ -27,4 +28,18 @@ func _on_questStepNode_resize_request(new_size):
 		rect_size.y = int(new_size.y/snap)*snap
 	else:
 		rect_size = new_size
-	text_edit.set_custom_minimum_size(Vector2(-1, rect_size.y-35))
+	text_edit.set_custom_minimum_size(Vector2(-1, get_rect().size.y-45))
+	get_parent().save()
+
+func _on_TextEdit_focus_entered():
+	get_parent().set_selected(self)
+
+func get_data():
+	return{"text": text_edit.text}
+
+func set_data(data):
+	text_edit.text = data["text"]
+
+
+func _on_TextEdit_text_changed():
+	get_parent().save()

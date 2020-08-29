@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://neuropolitical rg.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://QuestGraph.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 20
@@ -85,7 +86,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -250.0
+margin_left = -427.0
 margin_top = -250.0
 margin_right = 250.0
 margin_bottom = 250.0
@@ -141,9 +142,9 @@ margin_top = 5.0
 margin_right = 495.0
 margin_bottom = 19.0
 
-[node name="questDetails" type="TextEdit" parent="Journal"]
-margin_left = 105.0
-margin_top = 25.0
-margin_right = 495.0
-margin_bottom = 465.0
+[node name="QuestGraph" parent="Journal" instance=ExtResource( 3 )]
+margin_left = 106.0
+margin_top = 40.0
+margin_right = 664.0
+margin_bottom = 483.0
 [connection signal="pressed" from="Journal/addButton" to="." method="_on_add_button_pressed"]

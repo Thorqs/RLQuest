@@ -20,8 +20,9 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="questStepNode" type="GraphNode"]
-margin_right = 630.0
-margin_bottom = 446.0
+margin_top = -1.98801
+margin_right = 371.0
+margin_bottom = 273.012
 custom_styles/frame = ExtResource( 2 )
 custom_styles/selectedframe = SubResource( 1 )
 custom_constants/port_offset = 14
@@ -30,10 +31,10 @@ show_close = true
 resizable = true
 slot/0/left_enabled = true
 slot/0/left_type = 0
-slot/0/left_color = Color( 0.0980392, 0.392157, 0, 1 )
+slot/0/left_color = Color( 1, 1, 1, 1 )
 slot/0/right_enabled = true
 slot/0/right_type = 0
-slot/0/right_color = Color( 0.0980392, 0.392157, 0, 1 )
+slot/0/right_color = Color( 1, 1, 1, 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -42,10 +43,12 @@ __meta__ = {
 [node name="TextEdit" type="TextEdit" parent="."]
 margin_left = 25.0
 margin_top = 27.0
-margin_right = 605.0
+margin_right = 346.0
 margin_bottom = 27.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Title"
 [connection signal="close_request" from="." to="." method="_on_questStepNode_close_request"]
 [connection signal="resize_request" from="." to="." method="_on_questStepNode_resize_request"]
+[connection signal="focus_entered" from="TextEdit" to="." method="_on_TextEdit_focus_entered"]
+[connection signal="text_changed" from="TextEdit" to="." method="_on_TextEdit_text_changed"]
