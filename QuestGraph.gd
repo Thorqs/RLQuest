@@ -33,6 +33,7 @@ func load_save():
 		if c is GraphNode:
 			c.free()
 	
+	# Put the nodes on the graph...
 	save_quest.open("res://qname.qst", File.READ)
 	var save_data = parse_json(save_quest.get_line())
 	for node in save_data["nodes"]:
@@ -43,6 +44,7 @@ func load_save():
 		graph_node_instance.set_offset(Vector2(float(node["offset_x"]), float(node["offset_y"])))
 		graph_node_instance.set_data(node["data"])
 	
+	# Connect them up..
 	for conn in save_data["connections"]:
 		connect_node(conn["from"], conn["from_port"], conn["to"], conn["to_port"])
 	save_quest.close()
@@ -85,9 +87,5 @@ func _on_QuestGraph_connection_to_empty(from, from_slot, release_position):
 	connect_node(from, from_slot, new_node.name, 0)
 	save()
 
-func _on_GraphEdit__end_node_move():
-	save()
-
-
 func _on_QuestGraph__end_node_move():
-	pass # Replace with function body.
+	save()

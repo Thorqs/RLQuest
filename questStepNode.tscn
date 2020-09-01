@@ -20,9 +20,8 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="questStepNode" type="GraphNode"]
-margin_top = -1.98801
-margin_right = 371.0
-margin_bottom = 273.012
+margin_right = 150.0
+margin_bottom = 90.0
 custom_styles/frame = ExtResource( 2 )
 custom_styles/selectedframe = SubResource( 1 )
 custom_constants/port_offset = 14
@@ -43,11 +42,13 @@ __meta__ = {
 [node name="TextEdit" type="TextEdit" parent="."]
 margin_left = 25.0
 margin_top = 27.0
-margin_right = 346.0
-margin_bottom = 27.0
+margin_right = 125.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 40 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Title"
+text = "Next Step"
+wrap_enabled = true
 [connection signal="close_request" from="." to="." method="_on_questStepNode_close_request"]
 [connection signal="resize_request" from="." to="." method="_on_questStepNode_resize_request"]
 [connection signal="focus_entered" from="TextEdit" to="." method="_on_TextEdit_focus_entered"]

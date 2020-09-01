@@ -1,3 +1,5 @@
+# Project specific ignores
+*.qst
 
 # Godot-specific ignores
 .import/

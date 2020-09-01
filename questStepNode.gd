@@ -5,7 +5,7 @@ onready var text_edit = $TextEdit
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	text_edit.set_custom_minimum_size(Vector2(-1, get_rect().size.y-5))
+	text_edit.set_custom_minimum_size(Vector2(-1, get_rect().size.y-30))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,7 +28,7 @@ func _on_questStepNode_resize_request(new_size):
 		rect_size.y = int(new_size.y/snap)*snap
 	else:
 		rect_size = new_size
-	text_edit.set_custom_minimum_size(Vector2(-1, get_rect().size.y-45))
+	text_edit.set_custom_minimum_size(Vector2(-1, get_rect().size.y-30)) # find a better solution
 	get_parent().save()
 
 func _on_TextEdit_focus_entered():

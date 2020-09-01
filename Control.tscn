@@ -139,12 +139,18 @@ __meta__ = {
 [node name="questHeader" type="Label" parent="Journal"]
 margin_left = 105.0
 margin_top = 5.0
-margin_right = 495.0
-margin_bottom = 19.0
+margin_right = 647.0
+margin_bottom = 28.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="QuestGraph" parent="Journal" instance=ExtResource( 3 )]
 margin_left = 106.0
 margin_top = 40.0
 margin_right = 664.0
 margin_bottom = 483.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_offset = Vector2( -263, -76.9998 )
 [connection signal="pressed" from="Journal/addButton" to="." method="_on_add_button_pressed"]
