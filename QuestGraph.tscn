@@ -19,7 +19,7 @@ __meta__ = {
 [node name="questStepNode" parent="." instance=ExtResource( 2 )]
 margin_left = 263.0
 margin_top = 40.0
-margin_right = 409.0
+margin_right = 396.0
 margin_bottom = 127.0
 mouse_filter = 1
 [connection signal="_end_node_move" from="." to="." method="_on_QuestGraph__end_node_move"]

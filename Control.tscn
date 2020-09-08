@@ -16,7 +16,10 @@ font_data = ExtResource( 2 )
 [node name="Control" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -0.00012207
+margin_left = 2.05249
+margin_top = -1.02621
+margin_right = 2.05237
+margin_bottom = -1.02625
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -38,7 +41,7 @@ margin_bottom = 25.0
 custom_fonts/font = SubResource( 1 )
 text = "Objectives"
 
-[node name="QuestListVBox" type="VBoxContainer" parent="ParentVBoX"]
+[node name="ObjListVBox" type="VBoxContainer" parent="ParentVBoX"]
 margin_top = 29.0
 margin_right = 215.0
 margin_bottom = 29.0
@@ -86,9 +89,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -427.0
+margin_left = -425.974
 margin_top = -250.0
-margin_right = 250.0
+margin_right = 251.026
 margin_bottom = 250.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -136,21 +139,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="questHeader" type="Label" parent="Journal"]
+[node name="questHeader" type="TextEdit" parent="Journal"]
 margin_left = 105.0
 margin_top = 5.0
-margin_right = 647.0
-margin_bottom = 28.0
+margin_right = 661.0
+margin_bottom = 25.0
+text = "Quest Name"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="QuestGraph" parent="Journal" instance=ExtResource( 3 )]
 margin_left = 106.0
-margin_top = 40.0
+margin_top = 28.0
 margin_right = 664.0
 margin_bottom = 483.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_offset = Vector2( -263, -76.9998 )
 [connection signal="pressed" from="Journal/addButton" to="." method="_on_add_button_pressed"]
+[connection signal="text_changed" from="Journal/questHeader" to="." method="_on_questHeader_text_changed"]

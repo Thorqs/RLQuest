@@ -1,8 +1,11 @@
 extends Control
 
 var quest_entry
-var quest_list
+var obj_list
 var journal
+var quest_list
+var activeQuest
+var qHead
 #var list_dragging
 #var list_box
 
@@ -10,14 +13,26 @@ var journal
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
 #	list_box = get_node("ParentVBoX")
-	quest_list = get_node("ParentVBoX/QuestListVBox")
+	obj_list = get_node("ParentVBoX/ObjListVBox")
 	quest_entry = load("res://quest_entry.tscn")
+	quest_list = get_node("Journal/questScroller/questNames")
 	journal = get_node("Journal")
 	get_node("MascotViewContainer/InteractionMenu").get_popup().connect("id_pressed", self, "_on_interact")
+	var qList = quest_list.get_children()
+	if len(qList) < 1:
+		_on_add_button_pressed()
+		qList = quest_list.get_children()
+	activeQuest = qList[0]
+	qHead = get_node("Journal/questHeader")
 
 # Add a quest
 func _on_add_button_pressed():
-	quest_list.add_child(quest_entry.instance())
+	var newTitle = Button.new()
+	newTitle.text = "New Quest!"
+	quest_list.add_child(newTitle)
+	newTitle.connect("pressed", self, "_on_quest_selected", [newTitle])
+	# link to title bar so it changes when title does...
+	# add tick box for "tracked" so only ticked one mimics? Could do similar with an "active" behind the scenes.. hm... flat button...
 
 # Interaction Menu Spawned
 func _on_interact(id):
@@ -40,3 +55,9 @@ func _on_interact(id):
 	#	if(list_dragging):
 	#		list_box._set_position(list_box.get_position() + event.get_relative())
 
+func _on_quest_selected(quest):
+	activeQuest = quest
+
+func _on_questHeader_text_changed():
+	# Set the currently active quest's name to contents
+	activeQuest.text = qHead.text
