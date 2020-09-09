@@ -24,15 +24,16 @@ func _ready():
 		qList = quest_list.get_children()
 	activeQuest = qList[0]
 	qHead = get_node("Journal/questHeader")
+	qHead.connect("text_changed", get_node("Journal/QuestGraph"), "_name_changed", [qHead])
+	activeQuest.emit_signal("pressed")
 
 # Add a quest
 func _on_add_button_pressed():
 	var newTitle = Button.new()
-	newTitle.text = "New Quest!"
+	newTitle.text = "Quest Name"
 	quest_list.add_child(newTitle)
 	newTitle.connect("pressed", self, "_on_quest_selected", [newTitle])
-	# link to title bar so it changes when title does...
-	# add tick box for "tracked" so only ticked one mimics? Could do similar with an "active" behind the scenes.. hm... flat button...
+	newTitle.connect("pressed", get_node("Journal/QuestGraph"), "_new_quest_selected", [newTitle])
 
 # Interaction Menu Spawned
 func _on_interact(id):
@@ -57,7 +58,13 @@ func _on_interact(id):
 
 func _on_quest_selected(quest):
 	activeQuest = quest
+	qHead.text = quest.text
+	# update name of file to be saved to
+	# load quest file
 
 func _on_questHeader_text_changed():
 	# Set the currently active quest's name to contents
 	activeQuest.text = qHead.text
+	# change name of save file
+	# update name file to be saved to
+

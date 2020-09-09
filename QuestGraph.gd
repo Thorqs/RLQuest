@@ -1,15 +1,32 @@
 extends GraphEdit
 
 onready var graph_node = preload("res://questStepNode.tscn")
-
+var qName
+var saveDir = "res://"
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pass
+
+func _new_quest_selected(quest):
+	if qName:
+		save()
+	qName = quest.text + ".qst"
+	print(qName)
 	load_save()
+
+func _name_changed(title):
+	#directory change name of old name to new name
+	var dir = Directory.new()
+	if dir.open(saveDir) == OK:
+		print(dir.file_exists(qName))
+		print(title.text)
+		print(dir.rename(qName, title.text + ".qst"))
+		qName = title.text + ".qst"
 
 func save():
 	var save_quest = File.new()
 	# get name from parent later
-	save_quest.open("res://qname.qst", File.WRITE)
+	save_quest.open(saveDir + qName, File.WRITE)
 	var node_data = []
 	for c in get_children():
 		if c is GraphNode:
@@ -26,7 +43,7 @@ func save():
 
 func load_save():
 	var save_quest = File.new()
-	if not save_quest.file_exists("res://qname.qst"):
+	if not save_quest.file_exists(qName):
 		return
 	
 	for c in get_children():
@@ -34,7 +51,7 @@ func load_save():
 			c.free()
 	
 	# Put the nodes on the graph...
-	save_quest.open("res://qname.qst", File.READ)
+	save_quest.open(saveDir + qName, File.READ)
 	var save_data = parse_json(save_quest.get_line())
 	for node in save_data["nodes"]:
 		var graph_node_instance = graph_node.instance()
@@ -74,11 +91,9 @@ func _on_QuestGraph_connection_request(from, from_slot, to, to_slot):
 	connect_node(from, from_slot, to, to_slot)
 	save()
 
-
 func _on_QuestGraph_disconnection_request(from, from_slot, to, to_slot):
 	disconnect_node(from, from_slot, to, to_slot)
 	save()
-
 
 func _on_QuestGraph_connection_to_empty(from, from_slot, release_position):
 	var new_node = graph_node.instance()
