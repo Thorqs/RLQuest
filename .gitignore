@@ -1,5 +1,6 @@
 # Project specific ignores
 *.qst
+quests/
 
 # Godot-specific ignores
 .import/

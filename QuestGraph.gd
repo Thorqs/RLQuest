@@ -2,7 +2,8 @@ extends GraphEdit
 
 onready var graph_node = preload("res://questStepNode.tscn")
 var qName
-var saveDir = "res://"
+var saveDir = "res://quests/" # make a better save dir for release
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -18,28 +19,28 @@ func _name_changed(title):
 	#directory change name of old name to new name
 	var dir = Directory.new()
 	if dir.open(saveDir) == OK:
-		print(dir.file_exists(qName))
-		print(title.text)
-		print(dir.rename(qName, title.text + ".qst"))
+		dir.rename(qName, title.text + ".qst")
 		qName = title.text + ".qst"
 
 func save():
 	var save_quest = File.new()
-	# get name from parent later
-	save_quest.open(saveDir + qName, File.WRITE)
-	var node_data = []
-	for c in get_children():
-		if c is GraphNode:
-			node_data.append({"name": c.name,
-								"offset_x": c.get_offset().x,
-								"offset_y": c.get_offset().y,
-								"size_x": c.get_rect().size.x,
-								"size_y": c.get_rect().size.y,
-								"data": c.get_data()})
-	var data = {"connections": get_connection_list(), "nodes": node_data}
-	save_quest.store_line(to_json(data))
-	save_quest.close()
-	print("saved!")
+	if qName.is_valid_filename():
+		save_quest.open(saveDir + qName, File.WRITE)
+		var node_data = []
+		for c in get_children():
+			if c is GraphNode:
+				node_data.append({"name": c.name,
+									"offset_x": c.get_offset().x,
+									"offset_y": c.get_offset().y,
+									"size_x": c.get_rect().size.x,
+									"size_y": c.get_rect().size.y,
+									"data": c.get_data()})
+		var data = {"connections": get_connection_list(), "nodes": node_data}
+		save_quest.store_line(to_json(data))
+		save_quest.close()
+		print("saved!")
+	else:
+		print("Cannot be saved.")
 
 func load_save():
 	var save_quest = File.new()

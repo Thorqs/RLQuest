@@ -18,6 +18,24 @@ func _ready():
 	quest_list = get_node("Journal/questScroller/questNames")
 	journal = get_node("Journal")
 	get_node("MascotViewContainer/InteractionMenu").get_popup().connect("id_pressed", self, "_on_interact")
+	
+	
+	# find all the quests that exist and make a list of them
+	var saveDir = Directory.new()
+	saveDir.open("res://")
+	if not saveDir.dir_exists("res://quests/"):
+		saveDir.make_dir("res://quests/")
+	saveDir.change_dir("res://quests/")
+	saveDir.list_dir_begin()
+	var questFile = saveDir.get_next()
+	while questFile != "":
+		if saveDir.current_is_dir():
+			pass
+		else:
+			_on_add_button_pressed(questFile.rstrip(".qst"))
+		questFile = saveDir.get_next()
+	
+	# populate a base quest if none exist
 	var qList = quest_list.get_children()
 	if len(qList) < 1:
 		_on_add_button_pressed()
@@ -28,9 +46,9 @@ func _ready():
 	activeQuest.emit_signal("pressed")
 
 # Add a quest
-func _on_add_button_pressed():
+func _on_add_button_pressed(title = "Quest Name"):
 	var newTitle = Button.new()
-	newTitle.text = "Quest Name"
+	newTitle.text = title
 	quest_list.add_child(newTitle)
 	newTitle.connect("pressed", self, "_on_quest_selected", [newTitle])
 	newTitle.connect("pressed", get_node("Journal/QuestGraph"), "_new_quest_selected", [newTitle])
