@@ -14,6 +14,20 @@ func _new_quest_selected(quest):
 	qName = quest.text + ".qst"
 	print(qName)
 	load_save()
+	var ends = get_ends()
+
+func get_ends():
+	var ends = []
+	var begs = []
+	for conn in get_connection_list():
+		if not conn["from"] in begs:
+			begs.append(conn["from"])
+		if not conn["to"] in begs and not conn["to"] in ends:
+			ends.append(conn["to"])
+	for node in ends:
+		if node in begs:
+			ends.erase(node)
+	return(ends)
 
 func _name_changed(title):
 	#directory change name of old name to new name
@@ -86,7 +100,6 @@ func _on_QuestGraph_delete_nodes_request():
 		if c is GraphNode and c.is_selected():
 			disconnect_connections_of_node(c.name)
 			c.queue_free()
-
 
 func _on_QuestGraph_connection_request(from, from_slot, to, to_slot):
 	connect_node(from, from_slot, to, to_slot)
