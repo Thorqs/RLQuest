@@ -18,8 +18,6 @@ func _on_questStepNode_close_request():
 	queue_free()
 	get_parent().save()
 
-
-
 func _on_questStepNode_resize_request(new_size):
 	var graph = get_parent()
 	if graph.has_method("is_using_snap") and graph.is_using_snap():

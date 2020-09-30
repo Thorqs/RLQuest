@@ -1,7 +1,7 @@
 extends Control
 
-var quest_entry
-var obj_list
+#var quest_entry
+#var obj_list
 var journal
 var quest_list
 var activeQuest
@@ -12,9 +12,9 @@ var qHead
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_tree().get_root().set_transparent_background(true)
-#	list_box = get_node("ParentVBoX")
-	obj_list = get_node("ParentVBoX/ObjListVBox")
-	quest_entry = load("res://quest_entry.tscn")
+#	list_box = get_node("ParentVBox")
+	#obj_list = get_node("ParentVBox/ObjListVBox")
+	#quest_entry = load("res://quest_entry.tscn")
 	quest_list = get_node("Journal/questScroller/questNames")
 	journal = get_node("Journal")
 	get_node("MascotViewContainer/InteractionMenu").get_popup().connect("id_pressed", self, "_on_interact")

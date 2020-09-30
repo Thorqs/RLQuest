@@ -1,6 +1,7 @@
 extends GraphEdit
 
 onready var graph_node = preload("res://questStepNode.tscn")
+onready var entry_node = preload("res://quest_entry.tscn")
 var qName
 var saveDir = "res://quests/" # make a better save dir for release
 
@@ -9,13 +10,26 @@ func _ready():
 	pass
 
 func _new_quest_selected(quest):
+	#print("QG Triggered")
+	# save the current quest if there is one
 	if qName:
 		save()
 	qName = quest.text + ".qst"
-	print(qName)
+	#print(qName)
 	load_save()
-	#var ends = get_ends()
-	print("QG Triggered")
+	
+	var objBox = get_node("../../ParentVBox/ObjListVBox")
+	var ends = get_ends()
+	for end in ends:
+		var entry = entry_node.instance()
+		print(entry)
+		# Add an entry to the objListVbox
+		objBox.add_child(entry)
+		entry.get_node("HBoxContainer/quest_name").text = end.get_node("TextEdit").text
+		# TODO: set up text updating beyond quest switch
+			# connect end's TextEdit's on text changed to method in entry?
+		# connect checkbox to delete node
+		entry.assoc_node = end
 
 func get_ends():
 	var ends = []
@@ -28,7 +42,10 @@ func get_ends():
 	for node in ends:
 		if node in begs:
 			ends.erase(node)
-	return(ends)
+	var enodes = []
+	for end in ends:
+		enodes.append(get_node(end))
+	return(enodes)
 
 func _name_changed(title):
 	#directory change name of old name to new name
