@@ -19,17 +19,20 @@ func _new_quest_selected(quest):
 	load_save()
 	
 	var objBox = get_node("../../ParentVBox/ObjListVBox")
+	# clear children
+	for child in objBox.get_children():
+		child.queue_free()
 	var ends = get_ends()
 	for end in ends:
 		var entry = entry_node.instance()
 		print(entry)
 		# Add an entry to the objListVbox
 		objBox.add_child(entry)
+		entry.assoc_node = end
 		entry.get_node("HBoxContainer/quest_name").text = end.get_node("TextEdit").text
 		# TODO: set up text updating beyond quest switch
 			# connect end's TextEdit's on text changed to method in entry?
-		# connect checkbox to delete node
-		entry.assoc_node = end
+		# checkbox to delete node
 
 func get_ends():
 	var ends = []
