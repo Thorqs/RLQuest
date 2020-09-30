@@ -77,8 +77,7 @@ func _on_interact(id):
 func _on_quest_selected(quest):
 	activeQuest = quest
 	qHead.text = quest.text
-	# update name of file to be saved to
-	# load quest file
+	print("control triggered")
 
 func _on_questHeader_text_changed():
 	# Set the currently active quest's name to contents

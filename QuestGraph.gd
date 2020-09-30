@@ -14,7 +14,8 @@ func _new_quest_selected(quest):
 	qName = quest.text + ".qst"
 	print(qName)
 	load_save()
-	var ends = get_ends()
+	#var ends = get_ends()
+	print("QG Triggered")
 
 func get_ends():
 	var ends = []
@@ -58,7 +59,7 @@ func save():
 
 func load_save():
 	var save_quest = File.new()
-	if not save_quest.file_exists(qName):
+	if not save_quest.file_exists(saveDir + qName):
 		return
 	
 	for c in get_children():
@@ -67,6 +68,7 @@ func load_save():
 	
 	# Put the nodes on the graph...
 	save_quest.open(saveDir + qName, File.READ)
+	print("Openned " + saveDir + qName)
 	var save_data = parse_json(save_quest.get_line())
 	for node in save_data["nodes"]:
 		var graph_node_instance = graph_node.instance()
