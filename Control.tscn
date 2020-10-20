@@ -17,9 +17,9 @@ font_data = ExtResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.05249
-margin_top = -1.02624
+margin_top = -3.1867
 margin_right = 2.05237
-margin_bottom = -1.02625
+margin_bottom = -3.18665
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -150,12 +150,14 @@ __meta__ = {
 }
 
 [node name="QuestGraph" parent="Journal" instance=ExtResource( 3 )]
-margin_left = 106.0
-margin_top = 28.0
-margin_right = 664.0
-margin_bottom = 483.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-scroll_offset = Vector2( -263, -76.9998 )
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -567.0
+margin_top = -467.0
+margin_right = -10.9999
+margin_bottom = -9.99997
+scroll_offset = Vector2( -399, -99 )
 [connection signal="pressed" from="Journal/addButton" to="." method="_on_add_button_pressed"]
 [connection signal="text_changed" from="Journal/questHeader" to="." method="_on_questHeader_text_changed"]

@@ -29,10 +29,11 @@ func _ready():
 	saveDir.list_dir_begin()
 	var questFile = saveDir.get_next()
 	while questFile != "":
+		print(questFile)
 		if saveDir.current_is_dir():
 			pass
 		else:
-			_on_add_button_pressed(questFile.rstrip(".qst"))
+			_on_add_button_pressed(questFile.get_basename()) # Has bug where anything ending with "st" has the st removed. It should only remove .qst from filenames
 		questFile = saveDir.get_next()
 	
 	# populate a base quest if none exist

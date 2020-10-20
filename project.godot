@@ -18,6 +18,7 @@ _global_script_class_icons={
 config/name="RL Quest"
 run/main_scene="res://Control.tscn"
 run/low_processor_mode=true
+boot_splash/bg_color=Color( 0.141176, 0.141176, 0.141176, 0 )
 config/icon="res://icon.png"
 
 [display]
@@ -29,6 +30,10 @@ window/size/fullscreen=true
 window/size/always_on_top=true
 window/per_pixel_transparency/allowed=true
 window/per_pixel_transparency/enabled=true
+
+[global]
+
+back=false
 
 [rendering]
 
