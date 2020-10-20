@@ -159,3 +159,9 @@ func _on_QuestGraph_connection_to_empty(from, from_slot, release_position):
 
 func _on_QuestGraph__end_node_move():
 	save()
+
+func _on_AddStepButton_pressed():
+	var new_node = graph_node.instance()
+	new_node.set_offset(Vector2(-20, 0))
+	add_child(new_node)
+	save()
