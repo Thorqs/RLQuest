@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://QuestGraph.gd" type="Script" id=1]
-[ext_resource path="res://questStepNode.tscn" type="PackedScene" id=2]
 
 [node name="QuestGraph" type="GraphEdit"]
 margin_top = -1.85229
@@ -13,11 +12,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="questStepNode" parent="." instance=ExtResource( 2 )]
-margin_right = 133.0
-margin_bottom = 87.0
-mouse_filter = 1
 
 [node name="AddStepButton" type="Button" parent="."]
 anchor_left = 1.0

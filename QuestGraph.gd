@@ -151,7 +151,7 @@ func _on_QuestGraph_disconnection_request(from, from_slot, to, to_slot):
 
 func _on_QuestGraph_connection_to_empty(from, from_slot, release_position):
 	var new_node = graph_node.instance()
-	new_node.set_offset(release_position-Vector2(0, new_node.rect_size.y/2))
+	new_node.set_offset(release_position+Vector2(-410, -150))
 	add_child(new_node)
 	print(connect_node(from, from_slot, new_node.name, 0))
 	save()
