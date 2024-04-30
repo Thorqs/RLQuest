@@ -4,6 +4,3 @@ I aim to do this by combatting analysis paralysis by the program choosing a task
 As the project develops, this decision making will likely become more advanced and more platforms targeted.
 
 One of the main inspirations for this project are quest logs in computer game; we have no problem working on quests in games and the same should be true of real life pursuits.
-
-# Specifications
-Specifications, documentation, and further design goals can be found on the [project wiki](https://github.com/Thorqs/RLQuest/wiki)
